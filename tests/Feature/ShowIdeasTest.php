@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Models\Category;
-use App\Models\Idea;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Models\Idea;
+use App\Models\Status;
+use App\Models\Category;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ShowIdeasTest extends TestCase
 {
@@ -17,15 +18,20 @@ class ShowIdeasTest extends TestCase
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         $categoryTwo = Category::factory()->create(['name' => 'Category 2']);
 
+        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+        $statusConsidering = Status::factory()->create(['name' => 'Considering', 'classes' => 'bg-purple text-white']);
+
         $ideaOne = Idea::factory()->create([
             'title' => 'My First Idea',
             'category_id' => $categoryOne->id,
+            'status_id' => $statusOpen->id,
             'description' => 'Description of my first idea',
         ]);
 
         $ideaTwo = Idea::factory()->create([
             'title' => 'My Second Idea',
             'category_id' => $categoryTwo->id,
+            'status_id' => $statusConsidering->id,
             'description' => 'Description of my second idea',
         ]);
 
@@ -35,9 +41,11 @@ class ShowIdeasTest extends TestCase
         $response->assertSee($ideaOne->title);
         $response->assertSee($ideaOne->description);
         $response->assertSee($categoryOne->name);
+        $response->assertSee('<div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>', false);
         $response->assertSee($ideaTwo->title);
         $response->assertSee($ideaTwo->description);
         $response->assertSee($categoryTwo->name);
+        $response->assertSee('<div class="bg-purple text-white text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Considering</div>', false);
     }
 
     /** @test */
@@ -45,8 +53,11 @@ class ShowIdeasTest extends TestCase
     {
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
 
+        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+
         $idea = Idea::factory()->create([
             'category_id' => $categoryOne->id,
+            'status_id' => $statusOpen->id,
             'title' => 'My First Idea',
             'description' => 'Description of my first idea',
         ]);
@@ -57,6 +68,7 @@ class ShowIdeasTest extends TestCase
         $response->assertSee($idea->title);
         $response->assertSee($idea->description);
         $response->assertSee($categoryOne->name);
+        $response->assertSee('<div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>', false);
     }
 
     /** @test */
@@ -64,8 +76,11 @@ class ShowIdeasTest extends TestCase
     {
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
 
+        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+
         Idea::factory(Idea::PAGINATION_COUNT + 1)->create([
             'category_id' => $categoryOne->id,
+            'status_id' => $statusOpen->id,
         ]);
 
         $ideaOne = Idea::find(1);
@@ -92,14 +107,18 @@ class ShowIdeasTest extends TestCase
     {
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
 
+        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+
         $ideaOne = Idea::factory()->create([
             'category_id' => $categoryOne->id,
+            'status_id' => $statusOpen->id,
             'title' => 'My First Idea',
             'description' => 'Description for my first idea',
         ]);
 
         $ideaTwo = Idea::factory()->create([
             'category_id' => $categoryOne->id,
+            'status_id' => $statusOpen->id,
             'title' => 'My First Idea',
             'description' => 'Another Description for my first idea',
         ]);
