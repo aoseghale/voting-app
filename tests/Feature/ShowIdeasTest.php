@@ -87,19 +87,19 @@ class ShowIdeasTest extends TestCase
         $ideaOne->title = 'My First Idea';
         $ideaOne->save();
 
-        $ideaNextPage = Idea::find(Idea::PAGINATION_COUNT + 1);
-        $ideaNextPage->title = 'My Next Page Idea';
-        $ideaNextPage->save();
+        $ideaLatest = Idea::find(Idea::PAGINATION_COUNT + 1);
+        $ideaLatest->title = 'My Latest Page Idea';
+        $ideaLatest->save();
 
         $response = $this->get(route('idea.index'));
 
-        $response->assertSee($ideaOne->title);
-        $response->assertDontSee($ideaNextPage->title);
+        $response->assertSee($ideaLatest->title);
+        $response->assertDontSee($ideaOne->title);
 
         $response = $this->get(route('idea.index') . '?page=2');
 
-        $response->assertSee($ideaNextPage->title);
-        $response->assertDontSee($ideaOne->title);
+        $response->assertSee($ideaOne->title);
+        $response->assertDontSee($ideaLatest->title);
     }
 
     /** @test */
