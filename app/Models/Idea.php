@@ -47,4 +47,15 @@ class Idea extends Model
             ]
         ];
     }
+
+    public function isVotedByUser(?User $user)
+    {
+        if (!$user) {
+            return false;
+        }
+
+        return Vote::where('user_id', $user->id)
+            ->where('idea_id', $this->id)
+            ->exists();
+    }
 }
