@@ -138,5 +138,5 @@ class SearchFilterTest extends TestCase
             ->assertViewHas('ideas', function ($ideas) {
                 return $ideas->count() === 2;
             });
-    }
+    }    
 }

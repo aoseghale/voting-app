@@ -167,6 +167,7 @@ class StatusFiltersTest extends TestCase
         $response = $this->get(route('idea.index', ['status' => 'Implemented']));
 
         $response->assertSee('border-blue text-gray-900');
-        $response->assertSee('<a wire:click.prevent="setStatus(\'Implemented\')" href="#" class="transition duration-150 ease-in border-b-4 pb-3 hover:border-blue  border-blue text-gray-900 ">Implemented (2)</a>', false);
+        // $response->assertSee('<a wire:click.prevent="setStatus(\'Implemented\')" href="#" class="transition duration-150 ease-in border-b-4 pb-3 hover:border-blue  border-blue text-gray-900 ">Implemented (2)</a>', false);
+        $response->assertSee('class="transition duration-150 ease-in border-b-4 pb-3 hover:border-blue  border-blue text-gray-900 ">Implemented (2)</a>', false);
     }
 }
