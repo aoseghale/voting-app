@@ -12,7 +12,7 @@ class GravatarTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function user_can_generate_gravatar_defaul_image_when_no_email_found_first_character_a()
+    public function user_can_generate_gravatar_default_image_when_no_email_found_first_character_a()
     {
         $user = User::factory()->create([
             'name' => 'Andrew',
@@ -35,7 +35,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function user_can_generate_gravatar_defaul_image_when_no_email_found_first_character_z()
+    public function user_can_generate_gravatar_default_image_when_no_email_found_first_character_z()
     {
         $user = User::factory()->create([
             'name' => 'Zeb',
@@ -58,7 +58,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function user_can_generate_gravatar_defaul_image_when_no_email_found_first_character_0()
+    public function user_can_generate_gravatar_default_image_when_no_email_found_first_character_0()
     {
         $user = User::factory()->create([
             'name' => 'Andrew',
@@ -81,7 +81,7 @@ class GravatarTest extends TestCase
     }
 
     /** @test */
-    public function user_can_generate_gravatar_defaul_image_when_no_email_found_first_character_9()
+    public function user_can_generate_gravatar_default_image_when_no_email_found_first_character_9()
     {
         $user = User::factory()->create([
             'name' => 'Andrew',
