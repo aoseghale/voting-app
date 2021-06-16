@@ -33,7 +33,7 @@ class Idea extends Model
 
     public function votes()
     {
-        return $this->belongsToMany(Idea::class, 'votes');
+        return $this->belongsToMany(User::class, 'votes');
     }
 
     /**
