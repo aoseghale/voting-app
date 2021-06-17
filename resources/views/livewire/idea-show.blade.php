@@ -45,9 +45,10 @@
                                 class="absolute w-44 z-10 text-left font-semibold bg-white shadow-dialog rounded-xl py-3 md:ml-8
                                 top-8 md:top-6 right-0 md:left-0"
                             >
+                                @can('update', $idea)
                                 <li>
                                     <a
-                                        @click="
+                                        @click.prevent="
                                             isOpen = false;
                                             $dispatch('custom-show-edit-modal');
                                         " 
@@ -57,6 +58,7 @@
                                         Edit Idea                                        
                                     </a>
                                 </li>
+                                @endcan
                                 <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Delete Idea</a></li>
                                 <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark as Spam</a></li>
                             </ul>                            

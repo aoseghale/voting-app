@@ -2,6 +2,11 @@
     x-cloak
     x-data="{ isOpen: false }"
     x-show="isOpen"
+    x-init="
+        window.livewire.on('ideaWasUpdated', () => {
+            isOpen = false;
+        });
+    "
     @keydown.escape.window="isOpen = false"
     @custom-show-edit-modal.window="isOpen = true"
     class="fixed z-10 inset-0 overflow-y-auto" 
@@ -38,7 +43,7 @@
 
                 <p class="text-xs text-center leading-5 text-gray-500 px-6 mt-4">You have one hour to edit your idea from the time you created it.</p>
 
-                <form wire:submit.prevent="createIdea" action="#" method="POST" class="space-y-4 px-4 py-6">
+                <form wire:submit.prevent="updateIdea" action="#" method="POST" class="space-y-4 px-4 py-6">
                     <div>
                         <input wire:model.defer="title" type="text" class="w-full text-sm bg-gray-100 border-none rounded-xl placeholder-gray-900 px-4 py-2" placeholder="Your idea" required>
                         @error('title')
@@ -47,10 +52,9 @@
                     </div>
                     <div>
                         <select wire:model.defer="category" name="category_add" id="category_add" class="w-full text-sm bg-gray-100 rounded-xl border-none px-4 py-2">
-                            {{-- @foreach ($categories as $category)
+                            @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach --}}
-                            <option value="1">Category 1</option>
+                            @endforeach
                         </select>                            
                     </div>
                     @error('category')
@@ -65,7 +69,7 @@
                     <div class="flex items-center justify-between space-x-3">
                         <button 
                             type="button"
-                            class="flex items-center justify-center w-1/2 h-11 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-3"
+                            class="flex items-center justify-center w-1/2 h-11 text-sm bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-3"
                         >
                             <svg 
                             class="text-gray-600 w-4 transform -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,9 +81,9 @@
                 
                         <button 
                             type="submit"
-                            class="flex items-center justify-center w-1/2 h-11 text-xs bg-blue text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
+                            class="flex items-center justify-center w-1/2 h-11 text-sm bg-blue text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3"
                         >
-                            <span>Submit</span>
+                            <span>Update</span>
                         </button>                            
                     </div>
                 </form>
