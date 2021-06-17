@@ -4,9 +4,7 @@ namespace Tests\Unit\Jobs;
 
 use App\Jobs\NotifyAllVoters;
 use App\Mail\IdeaStatusUpdatedMailable;
-use App\Models\Category;
 use App\Models\Idea;
-use App\Models\Status;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -28,17 +26,7 @@ class NotifyAllVotersTest extends TestCase
             'email' => 'user@user.com',
         ]);
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-
-        $statusConsidering = Status::factory()->create(['id' => 2, 'name' => 'Considering']);
-
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusConsidering->id,
-            'title' => 'My First Idea',
-            'description' => 'Description for my first idea',
-        ]);
+        $idea = Idea::factory()->create();
 
         Vote::create([
             'idea_id' => $idea->id,
