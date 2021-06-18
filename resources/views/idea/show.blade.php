@@ -27,6 +27,18 @@
     />
     @endcan
 
+    <livewire:mark-idea-as-spam
+        :idea="$idea"
+    />
+
+    @admin
+        @if ($idea->spam_reports > 0)
+    <livewire:mark-idea-as-not-spam
+        :idea="$idea"
+    />
+        @endif
+    @endadmin
+
     <div class="comments-container relative space-y-6 md:ml-22 pt-4 my-8 mt-1">
 
         <div class="comment-container relative bg-white rounded-xl flex mt-4">
