@@ -27,9 +27,11 @@
     />
     @endcan
 
+    @auth
     <livewire:mark-idea-as-spam
         :idea="$idea"
     />
+    @endauth
 
     @admin
         @if ($idea->spam_reports > 0)
