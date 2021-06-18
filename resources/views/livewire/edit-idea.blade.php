@@ -8,7 +8,10 @@
         });
     "
     @keydown.escape.window="isOpen = false"
-    @custom-show-edit-modal.window="isOpen = true"
+    @custom-show-edit-modal.window="
+        isOpen = true;
+        $nextTick(() => $refs.title.focus());
+    "
     class="fixed z-10 inset-0 overflow-y-auto" 
     aria-labelledby="modal-title" 
     role="dialog" 
@@ -45,7 +48,14 @@
 
                 <form wire:submit.prevent="updateIdea" action="#" method="POST" class="space-y-4 px-4 py-6">
                     <div>
-                        <input wire:model.defer="title" type="text" class="w-full text-sm bg-gray-100 border-none rounded-xl placeholder-gray-900 px-4 py-2" placeholder="Your idea" required>
+                        <input
+                            x-ref="title" 
+                            wire:model.defer="title" 
+                            type="text" 
+                            class="w-full text-sm bg-gray-100 border-none rounded-xl placeholder-gray-900 px-4 py-2" 
+                            placeholder="Your idea" 
+                            required
+                        >
                         @error('title')
                             <p class="text-red text-xs mt-1">{{ $message }}</p>
                         @enderror
