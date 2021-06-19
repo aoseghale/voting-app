@@ -18,9 +18,9 @@
     @endauth
 
     @admin
-        @if ($idea->spam_reports > 0)
+        {{-- @if ($idea->spam_reports > 0) --}}
     <livewire:mark-idea-as-not-spam
         :idea="$idea"
     />
-        @endif
+        {{-- @endif --}}
     @endadmin

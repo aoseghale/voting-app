@@ -36,6 +36,11 @@ class Idea extends Model
         return $this->belongsToMany(User::class, 'votes');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     /**
      * Return the sluggable configuration array for this model.
      *
