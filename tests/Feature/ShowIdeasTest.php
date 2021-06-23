@@ -71,25 +71,19 @@ class ShowIdeasTest extends TestCase
     /** @test */
     public function ideas_pagination_works()
     {
-        Idea::factory(Idea::PAGINATION_COUNT + 1)->create();
+        $ideaOne = Idea::factory()->create();
 
-        $ideaOne = Idea::find(1);
-        $ideaOne->title = 'My First Idea';
-        $ideaOne->save();
-
-        $ideaLatest = Idea::find(Idea::PAGINATION_COUNT + 1);
-        $ideaLatest->title = 'My Latest Page Idea';
-        $ideaLatest->save();
+        Idea::factory($ideaOne->getPerPage())->create();
 
         $response = $this->get(route('idea.index'));
 
-        $response->assertSee($ideaLatest->title);
+        $response->assertSee(Idea::find(Idea::count())->title);
         $response->assertDontSee($ideaOne->title);
 
         $response = $this->get(route('idea.index') . '?page=2');
 
+        $response->assertDontSee(Idea::find(Idea::count())->title);
         $response->assertSee($ideaOne->title);
-        $response->assertDontSee($ideaLatest->title);
     }
 
     /** @test */
