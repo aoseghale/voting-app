@@ -40,6 +40,10 @@
             Livewire.on('commentWasUpdated', message => {
                 showNotification(message);
             });            
+
+            Livewire.on('commentWasDeleted', message => {
+                showNotification(message);
+            });            
         @endif        
     "             
     x-transition:enter="transition ease-out duration-300"
