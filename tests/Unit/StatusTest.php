@@ -14,7 +14,7 @@ class StatusTest extends TestCase
     /** @test */
     public function can_get_count_of_each_status()
     {
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+        $statusOpen = Status::factory()->create(['name' => 'Open', ]);
         $statusConsidering = Status::factory()->create(['name' => 'Considering', ]);
         $statusInProgress = Status::factory()->create(['name' => 'In Progress', ]);
         $statusImplemented = Status::factory()->create(['name' => 'Implemented', ]);
