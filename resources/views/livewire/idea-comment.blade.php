@@ -1,5 +1,5 @@
 <div 
-    class="@if ($comment->is_status_update) is-status-update {{ 'status' . Str::kebab($comment->status->name) }} @endif  comment-container relative bg-white rounded-xl flex transition duration-500 ease-in mt-4">
+    class="@if ($comment->is_status_update) is-status-update {{ 'status-' . Str::kebab($comment->status->name) }} @endif  comment-container relative bg-white rounded-xl flex transition duration-500 ease-in mt-4">
     <div class="flex flex-col md:flex-row flex-1 px-4 py-3 md:py-6">
         <div class="flex-none">
             <a href="#">
@@ -19,7 +19,7 @@
                 
                 @if ($comment->is_status_update)
                     <h4 class="text-xl font-semibold mt-2 md:mt-0 mb-3">
-                        <a href="#" class="hover:underline">Status changed to "{{ $comment->status->name }}"</a>
+                        Status changed to "{{ $comment->status->name }}"
                     </h4> 
                 @endif
                
@@ -41,7 +41,7 @@
                 @auth
                 <div 
                     x-data="{ isOpen: false }"
-                    class="flex items-center space-x-2">
+                    class="text-gray-900 flex items-center space-x-2">
                     <div class="relative">
                         <button
                             @click="isOpen = !isOpen" 
