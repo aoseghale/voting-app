@@ -24,29 +24,21 @@ class StatusTest extends TestCase
             'status_id' => $statusOpen->id,
         ]);
 
-        foreach (range(1, 2) as $step) {
-            Idea::factory()->create([
-                'status_id' => $statusConsidering->id,
-            ]);
-        }
+        Idea::factory(2)->create([
+            'status_id' => $statusConsidering->id,
+        ]);
 
-        foreach (range(1, 3) as $step) {
-            Idea::factory()->create([
-                'status_id' => $statusInProgress->id,
-            ]);
-        }
+        Idea::factory(3)->create([
+            'status_id' => $statusInProgress->id,
+        ]);
 
-        foreach (range(1, 4) as $step) {
-            Idea::factory()->create([
-                'status_id' => $statusImplemented->id,
-            ]);
-        }
+        Idea::factory(4)->create([
+            'status_id' => $statusImplemented->id,
+        ]);
 
-        foreach (range(1, 5) as $step) {
-            Idea::factory()->create([
-                'status_id' => $statusClosed->id,
-            ]);
-        }
+        Idea::factory(5)->create([
+            'status_id' => $statusClosed->id,
+        ]);
 
         $this->assertEquals(15, Status::getCount()['all_statuses']);
         $this->assertEquals(1, Status::getCount()['open']);

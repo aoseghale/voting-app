@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        {{ $idea->title }} | Laracasts Voting
+    </x-slot>
     <div>
         {{-- @dump(url()->previous())
         @dump(url()->full()) --}}
